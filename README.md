@@ -19,8 +19,10 @@ Commands
 
 ```bash
 $ dokku help
-    domains <app>                                   display the domains for an app
-    domains:set <app> DOMAIN1 [DOMAIN2 ...]         set one or more domains
+    domains <app>                                                         display the domains for an app
+    domains:set <app> DOMAIN1 [DOMAIN2 ...]                               set one or more domains
+    domains:locations <app>                                               display the subapp locations for an app
+    domains:locations:set <app> LOCATION1:SUBAPP [LOCATION1:SUBAPP ...]   set one or more subapp locations
 ```
 
 Sample usage

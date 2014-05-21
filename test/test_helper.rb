@@ -21,6 +21,8 @@ class TestHelper
 
   def self.cleanup
     File.open(dokku_root.join('app/DOMAINS'), 'w') {|file| file.truncate(0) }
+    File.open(dokku_root.join('app/LOCATIONS'), 'w') {|file| file.truncate(0) }
+    File.open(dokku_root.join('app/LOCATIONS'), 'w') {|file| file.truncate(0) }
     File.open(dokku_root.join('sslapp/DOMAINS'), 'w') {|file| file.truncate(0) }
   end
 end
