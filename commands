@@ -16,7 +16,7 @@ end
 
 if cmd && cmd.start_with?("domains")
   fail "You must specify an app name" if app.nil? || app.strip.empty?
-  
+
   approot = File.join(root, app)
   domainfile = File.join(approot, 'DOMAINS')
   locationsfile = File.join(approot, 'LOCATIONS')
@@ -45,23 +45,24 @@ when 'domains:set'
   notice "Setting #{app} domains to: #{newdomains.join(" ")}"
   system "#{File.join(Pathname.new(__FILE__).dirname, 'nginx-pre-reload')} #{app}"
   system "sudo /etc/init.d/nginx reload"
-when 'domains:locations'
-  notice "Subapps locations for #{app}"
-  puts File.read(locationsfile)
-when 'domains:locations:set'
-  newlocations = ARGV[2..-1]
-  fail "Usage: dokku domains:locations:set APP LOCATION1:SUBAPP [LOCATION1:SUBAPP ...]\nMust specify a DOMAIN." if newlocations.empty?
+# when 'domains:locations'
+#   notice "Subapps locations for #{app}"
+#   puts File.read(locationsfile)
+# when 'domains:locations:set'
+#   newlocations = ARGV[2..-1]
+#   fail "Usage: dokku domains:locations:set APP LOCATION1:SUBAPP [LOCATION1:SUBAPP ...]\nMust specify a DOMAIN." if newlocations.empty?
+#
+#   File.open(locationsfile, 'w') { |file| file.write(newlocations.join(" ")) }
+#   notice "Setting #{app} subapp locations to: #{newlocations.join(" ")}"
+#   system "#{File.join(Pathname.new(__FILE__).dirname, 'nginx-pre-reload')} #{app}"
+#   system "sudo /etc/init.d/nginx reload"
+# domains:locations <app>                                               display the subapp locations for an app
+# domains:locations:set <app> LOCATION1:SUBAPP [LOCATION1:SUBAPP ...]   set one or more subapp locations
 
-  File.open(locationsfile, 'w') { |file| file.write(newlocations.join(" ")) }
-  notice "Setting #{app} subapp locations to: #{newlocations.join(" ")}"
-  system "#{File.join(Pathname.new(__FILE__).dirname, 'nginx-pre-reload')} #{app}"
-  system "sudo /etc/init.d/nginx reload"
 when 'help'
   puts STDIN.read unless STDIN.tty?
   puts <<-EOF
     domains <app>                                                         display the domains for an app
     domains:set <app> DOMAIN1 [DOMAIN2 ...]                               set one or more domains
-    domains:locations <app>                                               display the subapp locations for an app
-    domains:locations:set <app> LOCATION1:SUBAPP [LOCATION1:SUBAPP ...]   set one or more subapp locations
   EOF
 end

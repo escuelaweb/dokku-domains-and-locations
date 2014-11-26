@@ -18,7 +18,7 @@ server {
   listen      80;
   <% end %>
   server_name <%= hostname %>;
-  
+
   <% if use_ssl %>
   ssl on;
   ssl_certificate     <%= File.join(ssl, 'server.crt') %>;
@@ -55,4 +55,6 @@ server {
       }
     <% end %>
   <% end %>
+
+  include <%= "#{File.join(root, app, 'nginx.conf.d/*.conf')}" %>
 }
