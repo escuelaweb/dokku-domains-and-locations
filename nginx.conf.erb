@@ -56,5 +56,5 @@ server {
     <% end %>
   <% end %>
 
-  include <%= "#{File.join(root, app, 'nginx.conf.d/*.conf')}" %>
+  include <%= "#{File.join(root, app, 'nginx.conf.d/*.conf')}" %>;
 }
